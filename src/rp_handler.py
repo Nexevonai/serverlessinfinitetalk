@@ -27,6 +27,19 @@ def download_audio(url, save_path):
         print(f"下载音频文件时出错: {e}")
         return False
 
+# --- 辅助函数: 下载图片文件 ---
+def download_image(url, save_path):
+    try:
+        response = requests.get(url, stream=True, timeout=15)
+        response.raise_for_status()
+        with open(save_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        return True
+    except requests.exceptions.RequestException as e:
+        print(f"下载图片文件时出错: {e}")
+        return False
+
 # --- RunPod Handler ---
 def handler(job):
     job_input = job.get('input', {})
@@ -36,7 +49,39 @@ def handler(job):
     if not workflow or not isinstance(workflow, dict):
         return {"error": "输入错误: 'workflow' 键是必需的，且其值必须是一个有效的JSON对象。"}
 
-    # 2. (可选) 如果提供了audio_url，就自动处理音频加载
+    # 创建输入路径
+    input_path = "/root/comfy/ComfyUI/input"
+    if not os.path.exists(input_path):
+        os.makedirs(input_path)
+
+    # 2. (可选) 如果提供了image_url，就自动处理图片加载
+    if 'image_url' in job_input:
+        image_url = job_input['image_url']
+
+        # 判断文件扩展名
+        image_ext = ".png"
+        if image_url.lower().endswith(('.jpg', '.jpeg')):
+            image_ext = ".jpg"
+
+        image_filename = f"input_{uuid.uuid4()}{image_ext}"
+        save_path = os.path.join(input_path, image_filename)
+
+        if not download_image(image_url, save_path):
+            return {"error": f"无法从指定的URL下载图片: {image_url}"}
+
+        # 查找并注入到 LoadImage 节点
+        load_image_node_id = None
+        for node_id, node_data in workflow.items():
+            if node_data.get("class_type") == "LoadImage":
+                load_image_node_id = node_id
+                break
+
+        if load_image_node_id:
+            workflow[load_image_node_id]["inputs"]["image"] = image_filename
+        else:
+            return {"error": "提供了 'image_url' 但在工作流中找不到 'LoadImage' 节点。"}
+
+    # 3. (可选) 如果提供了audio_url，就自动处理音频加载
     if 'audio_url' in job_input:
         audio_url = job_input['audio_url']
         input_path = "/root/comfy/ComfyUI/input"
@@ -60,23 +105,42 @@ def handler(job):
         else:
             return {"error": "提供了 'audio_url' 但在工作流中找不到 'LoadAudio' 节点。"}
 
-    # 3. 找到最终的输出节点 (SaveAudioMP3)
+    # 4. (可选) 如果提供了 width/height，就自动处理输出尺寸
+    if 'width' in job_input:
+        width_value = int(job_input['width'])
+        for node_id, node_data in workflow.items():
+            if (node_data.get("class_type") == "INTConstant" and
+                node_data.get("_meta", {}).get("title") == "Width"):
+                workflow[node_id]["inputs"]["value"] = width_value
+                print(f"设置输出宽度为: {width_value}")
+                break
+
+    if 'height' in job_input:
+        height_value = int(job_input['height'])
+        for node_id, node_data in workflow.items():
+            if (node_data.get("class_type") == "INTConstant" and
+                node_data.get("_meta", {}).get("title") == "Height"):
+                workflow[node_id]["inputs"]["value"] = height_value
+                print(f"设置输出高度为: {height_value}")
+                break
+
+    # 5. 找到最终的输出节点 (VHS_VideoCombine)
     output_node_id = None
     for node_id, node_data in workflow.items():
-        if node_data.get("class_type") == "SaveAudioMP3":
+        if node_data.get("class_type") == "VHS_VideoCombine":
             output_node_id = node_id
             break
 
     if not output_node_id:
-        return {"error": "工作流中必须包含一个 'SaveAudioMP3' 节点作为输出。"}
+        return {"error": "工作流中必须包含一个 'VHS_VideoCombine' 节点作为输出。"}
 
     try:
-        # 4. 执行工作流
+        # 5. 执行工作流
         output_data = api.queue_prompt_and_get_images(workflow, output_node_id)
         if not output_data:
-             return {"error": "执行超时或工作流未生成任何音频输出。"}
+             return {"error": "执行超时或工作流未生成任何视频输出。"}
 
-        # 5. 上传音频文件到 Cloudflare R2 并返回 URL
+        # 6. 上传视频文件到 Cloudflare R2 并返回 URL
         # 初始化 R2 S3 客户端
         s3_client = boto3.client(
             's3',
@@ -89,34 +153,41 @@ def handler(job):
         bucket_name = os.environ.get('R2_BUCKET_NAME')
         public_url_base = os.environ.get('R2_PUBLIC_URL')
 
-        audio_urls = []
-        for audio_info in output_data:
-            filename = audio_info.get("filename")
+        video_urls = []
+        for video_info in output_data:
+            filename = video_info.get("filename")
             if filename:
-                # 获取音频字节数据
-                audio_bytes = api.get_image(filename, audio_info.get("subfolder"), audio_info.get("type"))
+                # 获取视频字节数据
+                video_bytes = api.get_image(filename, video_info.get("subfolder"), video_info.get("type"))
 
                 # 生成唯一的文件名
                 unique_filename = f"{uuid.uuid4()}_{filename}"
+
+                # 确定 ContentType
+                content_type = 'video/mp4'
+                if filename.lower().endswith('.webm'):
+                    content_type = 'video/webm'
+                elif filename.lower().endswith('.avi'):
+                    content_type = 'video/x-msvideo'
 
                 # 上传到 R2
                 s3_client.put_object(
                     Bucket=bucket_name,
                     Key=unique_filename,
-                    Body=audio_bytes,
-                    ContentType='audio/mpeg'
+                    Body=video_bytes,
+                    ContentType=content_type
                 )
 
                 # 构建公开 URL
-                audio_url = f"{public_url_base}/{unique_filename}"
-                audio_urls.append(audio_url)
+                video_url = f"{public_url_base}/{unique_filename}"
+                video_urls.append(video_url)
 
-        return {"audio": audio_urls}
+        return {"video": video_urls}
 
     except Exception as e:
         return {"error": f"处理过程中发生未知错误: {str(e)}"}
 
 # --- 启动 RunPod Worker ---
 if __name__ == "__main__":
-    print("ComfyUI Dynamic Workflow Worker (最终版) 启动中...")
+    print("WanVideo 2.1 InfiniteTalk Worker 启动中...")
     runpod.serverless.start({"handler": handler})

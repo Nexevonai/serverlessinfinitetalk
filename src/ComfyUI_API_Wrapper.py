@@ -32,8 +32,11 @@ class ComfyUI_API_Wrapper:
                         history = self.get_history(prompt_id)
                         if history and prompt_id in history:
                             outputs = history[prompt_id]['outputs'].get(output_node_id, {})
-                            # Try both 'images' (for SaveImage) and 'audio' (for SaveAudioMP3)
-                            return outputs.get('images', outputs.get('audio', []))
+                            # Try multiple output keys: images, audio, gifs (VHS_VideoCombine)
+                            return (outputs.get('images') or
+                                    outputs.get('audio') or
+                                    outputs.get('gifs') or
+                                    [])
         finally:
             ws.close()
 

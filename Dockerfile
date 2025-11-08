@@ -34,33 +34,83 @@ RUN /venv/bin/python -m pip install \
     boto3 \
     huggingface-hub
 
-# --- 5. 创建 VibeVoice 模型目录 ---
+# --- 5. 创建 WanVideo 模型目录 ---
 RUN mkdir -p \
-    $COMFYUI_PATH/models/vibevoice/tokenizer \
-    $COMFYUI_PATH/models/vibevoice/VibeVoice-Large
+    $COMFYUI_PATH/models/unet \
+    $COMFYUI_PATH/models/text_encoders \
+    $COMFYUI_PATH/models/vae \
+    $COMFYUI_PATH/models/clip_vision \
+    $COMFYUI_PATH/models/loras
 
-# --- 6. 下载 VibeVoice 模型文件 ---
-# Download VibeVoice-Large model (~18.7GB)
-RUN /venv/bin/huggingface-cli download aoi-ot/VibeVoice-Large \
-    --local-dir $COMFYUI_PATH/models/vibevoice/VibeVoice-Large \
+# --- 6. 下载 WanVideo 模型文件 ---
+# Main I2V model (Q4_0 quantized, ~10.2GB)
+RUN /venv/bin/huggingface-cli download city96/Wan2.1-I2V-14B-480P-gguf \
+    wan2.1-i2v-14b-480p-Q4_0_2.gguf \
+    --local-dir $COMFYUI_PATH/models/unet \
     --local-dir-use-symlinks False
 
-# Download Qwen2.5-1.5B tokenizer files
-RUN /venv/bin/huggingface-cli download Qwen/Qwen2.5-1.5B \
-    tokenizer_config.json vocab.json merges.txt tokenizer.json \
-    --local-dir $COMFYUI_PATH/models/vibevoice/tokenizer \
+# InfiniteTalk model (GGUF, ~2.04GB)
+RUN /venv/bin/huggingface-cli download Kijai/WanVideo_comfy_GGUF \
+    InfiniteTalk/Wan2_1-InfiniteTalk_Single_Q6_K_2.gguf \
+    --local-dir $COMFYUI_PATH/models/unet \
     --local-dir-use-symlinks False
 
-# --- 7. 安装 VibeVoice 自定义节点 ---
-RUN git clone https://github.com/Enemyx-net/VibeVoice-ComfyUI.git $COMFYUI_PATH/custom_nodes/VibeVoice-ComfyUI
+# Text encoder (FP8, ~6.73GB)
+RUN /venv/bin/huggingface-cli download Kijai/WanVideo_comfy \
+    umt5-xxl-enc-fp8_e4m3fn.safetensors \
+    --local-dir $COMFYUI_PATH/models/text_encoders \
+    --local-dir-use-symlinks False
 
-# --- 8. 安装 VibeVoice Python 依赖 ---
+# VAE (~254MB)
+RUN wget -O $COMFYUI_PATH/models/vae/wan_2.1_vae.safetensors \
+    "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors"
+
+# CLIP Vision (~1.26GB)
+RUN wget -O $COMFYUI_PATH/models/clip_vision/clip_vision_h.safetensors \
+    "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors"
+
+# Distill LoRA (~738MB - for 4-step fast generation)
+RUN /venv/bin/huggingface-cli download Kijai/WanVideo_comfy \
+    Lightx2v/Wan2.1-lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors \
+    --local-dir $COMFYUI_PATH/models/loras \
+    --local-dir-use-symlinks False
+
+# Note: Wav2Vec2 and Demucs models will auto-download on first use
+
+# --- 7. 安装 WanVideo 自定义节点 ---
+# Main WanVideo wrapper
+RUN git clone https://github.com/kijai/ComfyUI-WanVideoWrapper.git \
+    $COMFYUI_PATH/custom_nodes/ComfyUI-WanVideoWrapper && \
+    cd $COMFYUI_PATH/custom_nodes/ComfyUI-WanVideoWrapper && \
+    /venv/bin/python -m pip install -r requirements.txt || true
+
+# Audio separation nodes
+RUN git clone https://github.com/christian-byrne/audio-separation-nodes-comfyui.git \
+    $COMFYUI_PATH/custom_nodes/audio-separation-nodes-comfyui && \
+    cd $COMFYUI_PATH/custom_nodes/audio-separation-nodes-comfyui && \
+    /venv/bin/python -m pip install -r requirements.txt || true
+
+# Video helper suite (for VHS_VideoCombine)
+RUN git clone https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git \
+    $COMFYUI_PATH/custom_nodes/ComfyUI-VideoHelperSuite && \
+    cd $COMFYUI_PATH/custom_nodes/ComfyUI-VideoHelperSuite && \
+    /venv/bin/python -m pip install -r requirements.txt || true
+
+# KJNodes (utilities)
+RUN git clone https://github.com/kijai/ComfyUI-KJNodes.git \
+    $COMFYUI_PATH/custom_nodes/ComfyUI-KJNodes && \
+    cd $COMFYUI_PATH/custom_nodes/ComfyUI-KJNodes && \
+    /venv/bin/python -m pip install -r requirements.txt || true
+
+# --- 8. 安装 WanVideo Python 依赖 ---
 RUN /venv/bin/python -m pip install \
-    diffusers \
-    accelerate \
-    transformers>=4.51.3 \
-    sentencepiece \
-    soundfile
+    transformers \
+    soundfile \
+    librosa \
+    einops \
+    safetensors \
+    demucs \
+    accelerate
 
 # --- 8. 复制脚本并设置权限 ---
 # --- 关键修改：不再复制 workflow_api.json ---

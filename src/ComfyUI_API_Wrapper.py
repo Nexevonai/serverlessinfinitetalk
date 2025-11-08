@@ -18,7 +18,7 @@ class ComfyUI_API_Wrapper:
         prompt_id = self.queue_prompt(prompt).get('prompt_id')
         if not prompt_id:
             return None
-        
+
         ws_url = f"ws://{urlparse(self.server_address).netloc}/ws?clientId={self.client_id}"
         ws = websocket.WebSocket()
         ws.connect(ws_url)
@@ -31,10 +31,12 @@ class ComfyUI_API_Wrapper:
                     if message.get('type') == 'executed' and message.get('data', {}).get('prompt_id') == prompt_id:
                         history = self.get_history(prompt_id)
                         if history and prompt_id in history:
-                            return history[prompt_id]['outputs'].get(output_node_id, {}).get('images', [])
+                            outputs = history[prompt_id]['outputs'].get(output_node_id, {})
+                            # Try both 'images' (for SaveImage) and 'audio' (for SaveAudioMP3)
+                            return outputs.get('images', outputs.get('audio', []))
         finally:
             ws.close()
-        
+
         return None
 
     def queue_prompt(self, prompt):

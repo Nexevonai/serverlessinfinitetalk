@@ -1,0 +1,99 @@
+2025-11-08T16:48:37.275369305Z ==========
+2025-11-08T16:48:37.275374405Z == CUDA ==
+2025-11-08T16:48:37.275377255Z ==========
+2025-11-08T16:48:37.279615299Z CUDA Version 12.4.1
+2025-11-08T16:48:37.283487371Z Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+2025-11-08T16:48:37.283501551Z This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+2025-11-08T16:48:37.283508711Z By pulling and using the container, you accept the terms and conditions of this license:
+2025-11-08T16:48:37.283514761Z https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+2025-11-08T16:48:37.283525652Z A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+2025-11-08T16:48:37.311998197Z worker-comfyui: Starting ComfyUI in the background...
+2025-11-08T16:48:37.312235885Z Waiting for ComfyUI to be ready...
+2025-11-08T16:48:38.347081522Z ..[START] Security scan
+2025-11-08T16:48:38.347105143Z [DONE] Security scan
+2025-11-08T16:48:38.347109133Z ## ComfyUI-Manager: installing dependencies done.
+2025-11-08T16:48:38.347181116Z ** ComfyUI startup time: 2025-11-08 16:48:38.346
+2025-11-08T16:48:38.347314130Z ** Platform: Linux
+2025-11-08T16:48:38.347428773Z ** Python version: 3.11.10 (main, Sep  7 2024, 18:35:41) [GCC 11.4.0]
+2025-11-08T16:48:38.347594869Z ** Python executable: /venv/bin/python
+2025-11-08T16:48:38.347684921Z ** ComfyUI Path: /root/comfy/ComfyUI
+2025-11-08T16:48:38.347784395Z ** ComfyUI Base Folder Path: /root/comfy/ComfyUI
+2025-11-08T16:48:38.347912729Z ** User directory: /root/comfy/ComfyUI/user
+2025-11-08T16:48:38.348027382Z ** ComfyUI-Manager config path: /root/comfy/ComfyUI/user/default/ComfyUI-Manager/config.ini
+2025-11-08T16:48:38.348171627Z ** Log path: /root/comfy/ComfyUI/user/comfyui.log
+2025-11-08T16:48:39.009482426Z Prestartup times for custom nodes:
+2025-11-08T16:48:39.009512607Z    1.6 seconds: /root/comfy/ComfyUI/custom_nodes/ComfyUI-Manager
+2025-11-08T16:48:40.450853610Z Checkpoint files will always be loaded safely.
+2025-11-08T16:48:40.737317090Z Total VRAM 24092 MB, total RAM 257564 MB
+2025-11-08T16:48:40.737345661Z pytorch version: 2.9.0+cu128
+2025-11-08T16:48:40.737695622Z Set vram state to: NORMAL_VRAM
+2025-11-08T16:48:40.737990471Z Device: cuda:0 NVIDIA GeForce RTX 4090 : cudaMallocAsync
+2025-11-08T16:48:40.738213298Z Enabled pinned memory 244686.0
+2025-11-08T16:48:40.788050335Z working around nvidia conv3d memory bug.
+2025-11-08T16:48:41.767918414Z Using pytorch attention
+2025-11-08T16:48:43.642625667Z Python version: 3.11.10 (main, Sep  7 2024, 18:35:41) [GCC 11.4.0]
+2025-11-08T16:48:43.642655598Z ComfyUI version: 0.3.68
+2025-11-08T16:48:43.645587140Z ComfyUI frontend version: 1.28.8
+2025-11-08T16:48:43.646165998Z [Prompt Server] web root: /venv/lib/python3.11/site-packages/comfyui_frontend_package/static
+2025-11-08T16:48:44.819301785Z ### Loading: ComfyUI-Manager (V3.37)
+2025-11-08T16:48:44.819600145Z [ComfyUI-Manager] network_mode: public
+2025-11-08T16:48:44.885571570Z ### ComfyUI Version: v0.3.68-10-ga1a70362 | Released on '2025-11-07'
+2025-11-08T16:48:44.947149916Z [VibeVoice] Using embedded VibeVoice (MIT licensed)
+2025-11-08T16:48:44.949779059Z [VibeVoice] VibeVoice nodes registered successfully
+2025-11-08T16:48:44.951777032Z Import times for custom nodes:
+2025-11-08T16:48:44.952054421Z    0.0 seconds: /root/comfy/ComfyUI/custom_nodes/websocket_image_save.py
+2025-11-08T16:48:44.952070141Z    0.0 seconds: /root/comfy/ComfyUI/custom_nodes/VibeVoice-ComfyUI
+2025-11-08T16:48:44.952136843Z    0.1 seconds: /root/comfy/ComfyUI/custom_nodes/ComfyUI-Manager
+2025-11-08T16:48:45.085375094Z [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
+2025-11-08T16:48:45.233748360Z [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
+2025-11-08T16:48:45.259039496Z [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
+2025-11-08T16:48:45.570238564Z [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
+2025-11-08T16:48:45.632976477Z [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
+2025-11-08T16:48:45.738316310Z Context impl SQLiteImpl.
+2025-11-08T16:48:45.738354041Z Will assume non-transactional DDL.
+2025-11-08T16:48:45.739175997Z No target revision found.
+2025-11-08T16:48:45.749335027Z Starting server
+2025-11-08T16:48:45.749573414Z To see the GUI go to: http://0.0.0.0:8188
+2025-11-08T16:48:46.452644517Z .......ComfyUI is ready and listening.
+2025-11-08T16:48:46.452700249Z worker-comfyui: Starting RunPod Handler now that ComfyUI is ready.
+2025-11-08T16:48:48.345414718Z ComfyUI Dynamic Workflow Worker (最终版) 启动中...
+2025-11-08T16:48:48.345454789Z --- Starting Serverless Worker |  Version 1.7.13 ---
+2025-11-08T16:48:48.638006940Z {"requestId": null, "message": "Jobs in queue: 1", "level": "INFO"}
+2025-11-08T16:48:48.638042942Z {"requestId": null, "message": "Jobs in progress: 1", "level": "INFO"}
+2025-11-08T16:48:48.638101603Z {"requestId": "5b975890-8374-4358-8dfd-8a98c30e72e2-e1", "message": "Started.", "level": "INFO"}
+2025-11-08T16:48:48.699757483Z FETCH ComfyRegistry Data: 5/105
+2025-11-08T16:48:49.077334288Z got prompt
+2025-11-08T16:48:49.078967099Z [VibeVoice] Found 1 VibeVoice model(s) available
+2025-11-08T16:48:49.287406115Z APEX FusedRMSNorm not available, using native implementation
+2025-11-08T16:48:49.456497863Z [VibeVoice] Using embedded VibeVoice from /root/comfy/ComfyUI/custom_nodes/VibeVoice-ComfyUI/vvembed
+2025-11-08T16:48:49.456800383Z [VibeVoice] Found model files at: /root/comfy/ComfyUI/models/vibevoice/VibeVoice-Large
+2025-11-08T16:48:49.456815883Z [VibeVoice] Found model files at: /root/comfy/ComfyUI/models/vibevoice/VibeVoice-Large
+2025-11-08T16:48:49.457059491Z [VibeVoice] Using auto attention implementation selection
+2025-11-08T16:48:49.457073832Z [VibeVoice] Loading model from: /root/comfy/ComfyUI/models/vibevoice/VibeVoice-Large
+2025-11-08T16:48:51.593264748Z FETCH ComfyRegistry Data: 10/105
+2025-11-08T16:48:53.373406087Z Loading checkpoint shards:   0%|          | 0/10 [00:00<?, ?it/s]Loading checkpoint shards:  10%|█         | 1/10 [00:00<00:03,  2.80it/s]Loading checkpoint shards:  20%|██        | 2/10 [00:00<00:02,  2.87it/s]Loading checkpoint shards:  30%|███       | 3/10 [00:01<00:02,  2.89it/s]Loading checkpoint shards:  40%|████      | 4/10 [00:01<00:02,  2.91it/s]Loading checkpoint shards:  50%|█████     | 5/10 [00:01<00:01,  2.92it/s]Loading checkpoint shards:  60%|██████    | 6/10 [00:02<00:01,  2.87it/s]Loading checkpoint shards:  70%|███████   | 7/10 [00:02<00:01,  2.84it/s]Loading checkpoint shards:  80%|████████  | 8/10 [00:02<00:00,  2.60it/s]Loading checkpoint shards:  90%|█████████ | 9/10 [00:03<00:00,  2.35it/s]Loading checkpoint shards: 100%|██████████| 10/10 [00:03<00:00,  2.66it/s]Loading checkpoint shards: 100%|██████████| 10/10 [00:03<00:00,  2.72it/s]
+2025-11-08T16:48:53.395856073Z [VibeVoice] Model loaded in 3.94 seconds
+2025-11-08T16:48:53.404397632Z [VibeVoice] Loading VibeVoice processor...
+2025-11-08T16:48:53.404421383Z [VibeVoice] Found Qwen tokenizer in: /root/comfy/ComfyUI/models/vibevoice/tokenizer
+2025-11-08T16:48:53.404576117Z [VibeVoice] Found complete tokenizer at: /root/comfy/ComfyUI/models/vibevoice/tokenizer
+2025-11-08T16:48:53.408655066Z [VibeVoice] Standard from_pretrained failed:
+2025-11-08T16:48:53.408677006Z  requires the protobuf library but it was not found in your environment. Check out the instructions on the
+2025-11-08T16:48:53.408683317Z installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+2025-11-08T16:48:53.408689237Z that match your environment. Please note that you may need to restart your runtime after installation.
+2025-11-08T16:48:53.408766539Z [VibeVoice] Trying with allow remote files...
+2025-11-08T16:48:54.703865792Z [VibeVoice] Generating audio for Speaker 1: 23 words
+2025-11-08T16:48:54.706242177Z [VibeVoice] Starting audio generation with 42 diffusion steps...
+2025-11-08T16:48:54.722299532Z [VibeVoice] Generating audio with 42 diffusion steps...
+2025-11-08T16:48:54.722340293Z [VibeVoice] Note: Progress bar shows max possible tokens, not actual needed (~62 estimated)
+2025-11-08T16:48:54.722346884Z [VibeVoice] The generation will stop automatically when audio is complete
+2025-11-08T16:48:54.743706455Z FETCH ComfyRegistry Data: 15/105
+2025-11-08T16:48:57.619617868Z FETCH ComfyRegistry Data: 20/105
+2025-11-08T16:49:00.539290807Z FETCH ComfyRegistry Data: 25/105
+2025-11-08T16:49:03.446246226Z FETCH ComfyRegistry Data: 30/105
+2025-11-08T16:49:06.347631519Z FETCH ComfyRegistry Data: 35/105
+2025-11-08T16:49:07.534398595Z Generating:   0%|          | 0/584 [00:00<?, ?it/s]Generating (active: 1/1):   0%|          | 0/584 [00:00<?, ?it/s]Generating (active: 1/1):   0%|          | 1/584 [00:01<09:54,  1.02s/it]Generating (active: 1/1):   0%|          | 1/584 [00:01<09:54,  1.02s/it]Generating (active: 1/1):   0%|          | 2/584 [00:01<05:18,  1.83it/s]Generating (active: 1/1):   0%|          | 2/584 [00:01<05:18,  1.83it/s]Generating (active: 1/1):   1%|          | 3/584 [00:01<03:45,  2.58it/s]Generating (active: 1/1):   1%|          | 3/584 [00:01<03:45,  2.58it/s]Generating (active: 1/1):   1%|          | 4/584 [00:01<03:02,  3.17it/s]Generating (active: 1/1):   1%|          | 4/584 [00:01<03:02,  3.17it/s]Generating (active: 1/1):   1%|          | 5/584 [00:01<02:38,  3.65it/s]Generating (active: 1/1):   1%|          | 5/584 [00:01<02:38,  3.65it/s]Generating (active: 1/1):   1%|          | 6/584 [00:02<02:23,  4.02it/s]Generating (active: 1/1):   1%|          | 6/584 [00:02<02:23,  4.02it/s]Generating (active: 1/1):   1%|          | 7/584 [00:02<02:14,  4.28it/s]Generating (active: 1/1):   1%|          | 7/584 [00:02<02:14,  4.28it/s]Generating (active: 1/1):   1%|▏         | 8/584 [00:02<02:08,  4.47it/s]Generating (active: 1/1):   1%|▏         | 8/584 [00:02<02:08,  4.47it/s]Generating (active: 1/1):   2%|▏         | 9/584 [00:02<02:04,  4.63it/s]Generating (active: 1/1):   2%|▏         | 9/584 [00:02<02:04,  4.63it/s]Generating (active: 1/1):   2%|▏         | 10/584 [00:02<02:02,  4.70it/s]Generating (active: 1/1):   2%|▏         | 10/584 [00:02<02:02,  4.70it/s]Generating (active: 1/1):   2%|▏         | 11/584 [00:03<01:59,  4.79it/s]Generating (active: 1/1):   2%|▏         | 11/584 [00:03<01:59,  4.79it/s]Generating (active: 1/1):   2%|▏         | 12/584 [00:03<01:57,  4.86it/s]Generating (active: 1/1):   2%|▏         | 12/584 [00:03<01:57,  4.86it/s]Generating (active: 1/1):   2%|▏         | 13/584 [00:03<01:57,  4.86it/s]Generating (active: 1/1):   2%|▏         | 13/584 [00:03<01:57,  4.86it/s]Generating (active: 1/1):   2%|▏         | 14/584 [00:03<01:56,  4.90it/s]Generating (active: 1/1):   2%|▏         | 14/584 [00:03<01:56,  4.90it/s]Generating (active: 1/1):   3%|▎         | 15/584 [00:03<01:55,  4.94it/s]Generating (active: 1/1):   3%|▎         | 15/584 [00:03<01:55,  4.94it/s]Generating (active: 1/1):   3%|▎         | 16/584 [00:04<01:55,  4.91it/s]Generating (active: 1/1):   3%|▎         | 16/584 [00:04<01:55,  4.91it/s]Generating (active: 1/1):   3%|▎         | 17/584 [00:04<01:54,  4.95it/s]Generating (active: 1/1):   3%|▎         | 17/584 [00:04<01:54,  4.95it/s]Generating (active: 1/1):   3%|▎         | 18/584 [00:04<01:53,  4.98it/s]Generating (active: 1/1):   3%|▎         | 18/584 [00:04<01:53,  4.98it/s]Generating (active: 1/1):   3%|▎         | 19/584 [00:04<01:53,  4.96it/s]Generating (active: 1/1):   3%|▎         | 19/584 [00:04<01:53,  4.96it/s]Generating (active: 1/1):   3%|▎         | 20/584 [00:04<01:52,  4.99it/s]Generating (active: 1/1):   3%|▎         | 20/584 [00:04<01:52,  4.99it/s]Generating (active: 1/1):   4%|▎         | 21/584 [00:05<01:52,  5.00it/s]Generating (active: 1/1):   4%|▎         | 21/584 [00:05<01:52,  5.00it/s]Generating (active: 1/1):   4%|▍         | 22/584 [00:05<01:52,  4.98it/s]Generating (active: 1/1):   4%|▍         | 22/584 [00:05<01:52,  4.98it/s]Generating (active: 1/1):   4%|▍         | 23/584 [00:05<01:52,  5.00it/s]Generating (active: 1/1):   4%|▍         | 23/584 [00:05<01:52,  5.00it/s]Generating (active: 1/1):   4%|▍         | 24/584 [00:05<01:51,  5.02it/s]Generating (active: 1/1):   4%|▍         | 24/584 [00:05<01:51,  5.02it/s]Generating (active: 1/1):   4%|▍         | 25/584 [00:05<01:52,  4.99it/s]Generating (active: 1/1):   4%|▍         | 25/584 [00:05<01:52,  4.99it/s]Generating (active: 1/1):   4%|▍         | 26/584 [00:06<01:51,  5.00it/s]Generating (active: 1/1):   4%|▍         | 26/584 [00:06<01:51,  5.00it/s]Generating (active: 1/1):   5%|▍         | 27/584 [00:06<01:51,  4.99it/s]Generating (active: 1/1):   5%|▍         | 27/584 [00:06<01:51,  4.99it/s]Generating (active: 1/1):   5%|▍         | 28/584 [00:06<01:52,  4.96it/s]Generating (active: 1/1):   5%|▍         | 28/584 [00:06<01:52,  4.96it/s]Generating (active: 1/1):   5%|▍         | 29/584 [00:06<01:51,  4.98it/s]Generating (active: 1/1):   5%|▍         | 29/584 [00:06<01:51,  4.98it/s]Generating (active: 1/1):   5%|▌         | 30/584 [00:06<01:51,  4.97it/s]Generating (active: 1/1):   5%|▌         | 30/584 [00:06<01:51,  4.97it/s]Generating (active: 1/1):   5%|▌         | 31/584 [00:07<01:51,  4.97it/s]Generating (active: 1/1):   5%|▌         | 31/584 [00:07<01:51,  4.97it/s]Generating (active: 1/1):   5%|▌         | 32/584 [00:07<01:50,  4.99it/s]Generating (active: 1/1):   5%|▌         | 32/584 [00:07<01:50,  4.99it/s]Generating (active: 1/1):   6%|▌         | 33/584 [00:07<01:50,  4.98it/s]Generating (active: 1/1):   6%|▌         | 33/584 [00:07<01:50,  4.98it/s]Generating (active: 1/1):   6%|▌         | 34/584 [00:07<01:50,  4.99it/s]Generating (active: 1/1):   6%|▌         | 34/584 [00:07<01:50,  4.99it/s]Generating (active: 1/1):   6%|▌         | 35/584 [00:07<01:49,  5.00it/s]Generating (active: 1/1):   6%|▌         | 35/584 [00:07<01:49,  5.00it/s]Generating (active: 1/1):   6%|▌         | 36/584 [00:08<01:50,  4.96it/s]Generating (active: 1/1):   6%|▌         | 36/584 [00:08<01:50,  4.96it/s]Generating (active: 1/1):   6%|▋         | 37/584 [00:08<01:49,  4.99it/s]Generating (active: 1/1):   6%|▋         | 37/584 [00:08<01:49,  4.99it/s]Generating (active: 1/1):   7%|▋         | 38/584 [00:08<01:49,  5.00it/s]Generating (active: 1/1):   7%|▋         | 38/584 [00:08<01:49,  5.00it/s]Generating (active: 1/1):   7%|▋         | 39/584 [00:08<01:49,  4.96it/s]Generating (active: 1/1):   7%|▋         | 39/584 [00:08<01:49,  4.96it/s]Generating (active: 1/1):   7%|▋         | 40/584 [00:08<01:49,  4.98it/s]Generating (active: 1/1):   7%|▋         | 40/584 [00:08<01:49,  4.98it/s]Generating (active: 1/1):   7%|▋         | 41/584 [00:09<01:48,  5.00it/s]Generating (active: 1/1):   7%|▋         | 41/584 [00:09<01:48,  5.00it/s]Generating (active: 1/1):   7%|▋         | 42/584 [00:09<01:49,  4.97it/s]Generating (active: 1/1):   7%|▋         | 42/584 [00:09<01:49,  4.97it/s]Generating (active: 1/1):   7%|▋         | 43/584 [00:09<01:48,  4.99it/s]Generating (active: 1/1):   7%|▋         | 43/584 [00:09<01:48,  4.99it/s]Generating (active: 1/1):   8%|▊         | 44/584 [00:09<01:47,  5.01it/s]Generating (active: 1/1):   8%|▊         | 44/584 [00:09<01:47,  5.01it/s]Generating (active: 1/1):   8%|▊         | 45/584 [00:09<01:48,  4.99it/s]Generating (active: 1/1):   8%|▊         | 45/584 [00:09<01:48,  4.99it/s]Generating (active: 1/1):   8%|▊         | 46/584 [00:10<01:47,  5.01it/s]Generating (active: 1/1):   8%|▊         | 46/584 [00:10<01:47,  5.01it/s]Generating (active: 1/1):   8%|▊         | 47/584 [00:10<01:46,  5.02it/s]Generating (active: 1/1):   8%|▊         | 47/584 [00:10<01:46,  5.02it/s]Generating (active: 1/1):   8%|▊         | 48/584 [00:10<01:47,  4.98it/s]Generating (active: 1/1):   8%|▊         | 48/584 [00:10<01:47,  4.98it/s]Generating (active: 1/1):   8%|▊         | 49/584 [00:10<01:47,  4.99it/s]Generating (active: 1/1):   8%|▊         | 49/584 [00:10<01:47,  4.99it/s]Generating (active: 1/1):   9%|▊         | 50/584 [00:10<01:46,  5.01it/s]Generating (active: 1/1):   9%|▊         | 50/584 [00:10<01:46,  5.01it/s]Generating (active: 1/1):   9%|▊         | 51/584 [00:11<01:47,  4.97it/s]Generating (active: 1/1):   9%|▊         | 51/584 [00:11<01:47,  4.97it/s]Generating (active: 1/1):   9%|▉         | 52/584 [00:11<01:46,  4.99it/s]Generating (active: 1/1):   9%|▉         | 52/584 [00:11<01:46,  4.99it/s]Generating (active: 1/1):   9%|▉         | 53/584 [00:11<01:46,  5.00it/s]Generating (active: 1/1):   9%|▉         | 53/584 [00:11<01:46,  5.00it/s]Generating (active: 1/1):   9%|▉         | 54/584 [00:11<01:47,  4.95it/s]Generating (active: 1/1):   9%|▉         | 54/584 [00:11<01:47,  4.95it/s]Generating (active: 1/1):   9%|▉         | 55/584 [00:11<01:46,  4.95it/s]Generating (active: 1/1):   9%|▉         | 55/584 [00:11<01:46,  4.95it/s]Generating (active: 1/1):  10%|▉         | 56/584 [00:12<01:46,  4.95it/s]Generating (active: 1/1):  10%|▉         | 56/584 [00:12<01:46,  4.95it/s]Generating (active: 1/1):  10%|▉         | 57/584 [00:12<01:46,  4.95it/s]Generating (active: 1/1):  10%|▉         | 57/584 [00:12<01:46,  4.95it/s]Generating (active: 1/1):  10%|▉         | 58/584 [00:12<01:45,  4.99it/s]Generating (active: 1/1):  10%|▉         | 58/584 [00:12<01:45,  4.99it/s]Generating (active: 1/1):  10%|█         | 59/584 [00:12<01:45,  4.98it/s]Generating (active: 1/1):  10%|█         | 59/584 [00:12<01:45,  4.98it/s]Generating (active: 1/1):  10%|█         | 59/584 [00:12<01:45,  4.98it/s]Generation complete:  10%|█         | 59/584 [00:12<01:45,  4.98it/s]                                                                          [VibeVoice] Concatenating 1 audio segments (including pauses)...
+2025-11-08T16:49:07.534747106Z [VibeVoice] Successfully generated multi-speaker audio with pauses
+2025-11-08T16:49:07.631446918Z Prompt executed in 18.55 seconds
+2025-11-08T16:49:08.163274845Z {"requestId": "5b975890-8374-4358-8dfd-8a98c30e72e2-e1", "message": "Finished.", "level": "INFO"}
+2025-11-08T16:49:09.276717645Z FETCH ComfyRegistry Data: 40/105
+2025-11-08T16:49:12.233605074Z FETCH ComfyRegistry Data: 45/105
